@@ -1,0 +1,52 @@
+{
+	"name": "MW_EXT_Emoji",
+	"version": "1.0.0",
+	"author": [
+		"[https://kitsune.solar/ Kitsune Solar]",
+		"[https://metastore.pro/ METASTORE]",
+		"..."
+	],
+	"url": "https://metastore.pro/",
+	"descriptionmsg": "mw-ext-emoji-desc",
+	"license-name": "[https://www.gnu.org/licenses/gpl-3.0.txt GPL-3.0]",
+	"type": "parserhook",
+	"require": {
+		"MediaWiki": ">= 1.30.0"
+	},
+	"AutoloadClasses": {
+		"MW_EXT_Emoji": "MW_EXT_Emoji.class.php"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": [
+			"MW_EXT_Emoji::onParserFirstCallInit"
+		],
+		"BeforePageDisplay": [
+			"MW_EXT_Emoji::onBeforePageDisplay"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"MW_EXT_EmojiMagic": "MW_EXT_Emoji.i18n.magic.php"
+	},
+	"MessagesDirs": {
+		"MW_EXT_Emoji": [
+			"i18n"
+		]
+	},
+	"ResourceModules": {
+		"ext.mw.emoji.styles": {
+			"styles": [
+				"styles/theme.css"
+			],
+			"position": "top",
+			"targets": [
+				"desktop",
+				"mobile"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "MW_EXT_Emoji/modules"
+	},
+	"manifest_version": 2
+}
