@@ -1,9 +1,15 @@
 <?php
 
+namespace MediaWiki\Extension\MW_EXT_Emoji;
+
+use OutputPage;
+use Parser;
+use RequestContext;
+use Skin;
+
 /**
  * Class MW_EXT_Emoji
  * ------------------------------------------------------------------------------------------------------------------ */
-
 class MW_EXT_Emoji {
 
 	/**
@@ -23,15 +29,15 @@ class MW_EXT_Emoji {
 	/**
 	 * Get configuration parameters.
 	 *
-	 * @param $getData
+	 * @param $config
 	 *
 	 * @return mixed
-	 * @throws ConfigException
+	 * @throws \ConfigException
 	 * -------------------------------------------------------------------------------------------------------------- */
 
-	private static function getConfig( $getData ) {
-		$context   = new RequestContext();
-		$getConfig = $context->getConfig()->get( $getData );
+	private static function getConfig( $config ) {
+		$context   = RequestContext::getMain()->getConfig();
+		$getConfig = $context->get( $config );
 
 		return $getConfig;
 	}
@@ -42,7 +48,7 @@ class MW_EXT_Emoji {
 	 * @param Parser $parser
 	 *
 	 * @return bool
-	 * @throws MWException
+	 * @throws \MWException
 	 * -------------------------------------------------------------------------------------------------------------- */
 
 	public static function onParserFirstCallInit( Parser $parser ) {
@@ -59,7 +65,7 @@ class MW_EXT_Emoji {
 	 * @param string $size
 	 *
 	 * @return string
-	 * @throws ConfigException
+	 * @throws \ConfigException
 	 * -------------------------------------------------------------------------------------------------------------- */
 
 	public static function onRenderTag( Parser $parser, $id = '', $size = '' ) {
@@ -90,7 +96,7 @@ class MW_EXT_Emoji {
 	 * -------------------------------------------------------------------------------------------------------------- */
 
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
-		$out->addModuleStyles( array( 'ext.mw.emoji.styles' ) );
+		$out->addModuleStyles( [ 'ext.mw.emoji.styles' ] );
 
 		return true;
 	}

@@ -14,14 +14,14 @@
 		"MediaWiki": ">= 1.30.0"
 	},
 	"AutoloadClasses": {
-		"MW_EXT_Emoji": "MW_EXT_Emoji.class.php"
+		"MediaWiki\\Extension\\MW_EXT_Emoji\\MW_EXT_Emoji": "MW_EXT_Emoji.class.php"
 	},
 	"Hooks": {
 		"ParserFirstCallInit": [
-			"MW_EXT_Emoji::onParserFirstCallInit"
+			"MediaWiki\\Extension\\MW_EXT_Emoji\\MW_EXT_Emoji::onParserFirstCallInit"
 		],
 		"BeforePageDisplay": [
-			"MW_EXT_Emoji::onBeforePageDisplay"
+			"MediaWiki\\Extension\\MW_EXT_Emoji\\MW_EXT_Emoji::onBeforePageDisplay"
 		]
 	},
 	"ExtensionMessagesFiles": {
