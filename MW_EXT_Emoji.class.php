@@ -3,41 +3,12 @@
 namespace MediaWiki\Extension\MW_EXT_Emoji;
 
 use OutputPage, Parser, RequestContext, Skin;
+use MediaWiki\Extension\MW_EXT_Core\MW_EXT_Core;
 
 /**
  * Class MW_EXT_Emoji
  * ------------------------------------------------------------------------------------------------------------------ */
 class MW_EXT_Emoji {
-
-	/**
-	 * Clear DATA (escape html).
-	 *
-	 * @param $string
-	 *
-	 * @return string
-	 * -------------------------------------------------------------------------------------------------------------- */
-
-	private static function clearData( $string ) {
-		$outString = htmlspecialchars( trim( $string ), ENT_QUOTES );
-
-		return $outString;
-	}
-
-	/**
-	 * Get configuration parameters.
-	 *
-	 * @param $config
-	 *
-	 * @return mixed
-	 * @throws \ConfigException
-	 * -------------------------------------------------------------------------------------------------------------- */
-
-	private static function getConfig( $config ) {
-		$context   = RequestContext::getMain()->getConfig();
-		$getConfig = $context->get( $config );
-
-		return $getConfig;
-	}
 
 	/**
 	 * Register tag function.
@@ -67,11 +38,11 @@ class MW_EXT_Emoji {
 
 	public static function onRenderTag( Parser $parser, $id = '', $size = '' ) {
 		// Argument: ID.
-		$getID = self::clearData( $id ?? '' ?: '' );
-		$outID = self::getConfig( 'ScriptPath' ) . '/extensions/MW_EXT_Emoji/storage/images/' . mb_strtolower( $getID ) . '.svg';
+		$getID = MW_EXT_Core::outClear( $id ?? '' ?: '' );
+		$outID = MW_EXT_Core::getConfig( 'ScriptPath' ) . '/extensions/MW_EXT_Emoji/storage/images/' . MW_EXT_Core::outConvert( $getID ) . '.svg';
 
 		// Argument: size.
-		$getSize = self::clearData( $size ?? '' ?: '' );
+		$getSize = MW_EXT_Core::outClear( $size ?? '' ?: '' );
 		$outSize = empty( $getSize ) ? '' : ' width: ' . $getSize . 'em; height: ' . $getSize . 'em;';
 
 		// Out HTML.
