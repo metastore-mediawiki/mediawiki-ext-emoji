@@ -46,7 +46,7 @@ class MW_EXT_Emoji {
 		$outSize = empty( $getSize ) ? '' : ' width: ' . $getSize . 'em; height: ' . $getSize . 'em;';
 
 		// Out HTML.
-		$outHTML = '<span style="background-image: url(' . $outID . ');' . $outSize . '" class="mw-ext-emoji"></span>';
+		$outHTML = '<span style="background-image: url(' . $outID . ');' . $outSize . '" class="mw-ext-emoji navigation-not-searchable"></span>';
 
 		// Out parser.
 		$outParser = $parser->insertStripItem( $outHTML, $parser->mStripState );
