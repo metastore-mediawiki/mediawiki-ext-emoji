@@ -20,7 +20,7 @@ class MW_EXT_Emoji {
 	 * -------------------------------------------------------------------------------------------------------------- */
 
 	public static function onParserFirstCallInit( Parser $parser ) {
-		$parser->setFunctionHook( 'emoji', __CLASS__ . '::onRenderTag' );
+		$parser->setFunctionHook( 'emoji', [ __CLASS__, 'onRenderTag' ] );
 
 		return true;
 	}
@@ -37,7 +37,7 @@ class MW_EXT_Emoji {
 	 * -------------------------------------------------------------------------------------------------------------- */
 
 	public static function onRenderTag( Parser $parser, $id = '', $size = '' ) {
-		// Argument: ID.
+		// Argument: id.
 		$getID = MW_EXT_Core::outClear( $id ?? '' ?: '' );
 		$outID = MW_EXT_Core::getConfig( 'ScriptPath' ) . '/extensions/MW_EXT_Emoji/storage/images/' . MW_EXT_Core::outConvert( $getID ) . '.svg';
 
