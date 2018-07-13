@@ -2,13 +2,29 @@
 
 namespace MediaWiki\Extension\MW_EXT_Emoji;
 
-use OutputPage, Parser, RequestContext, Skin;
+use OutputPage, Parser, Skin;
 use MediaWiki\Extension\MW_EXT_Core\MW_EXT_Core;
 
 /**
  * Class MW_EXT_Emoji
- * ------------------------------------------------------------------------------------------------------------------ */
+ */
 class MW_EXT_Emoji {
+
+	/**
+	 * Get emoji file.
+	 *
+	 * @param $id
+	 *
+	 * @return string
+	 * @throws \ConfigException
+	 */
+	private static function getEmoji( $id ) {
+		$path = MW_EXT_Core::getConfig( 'ScriptPath' ) . '/extensions/MW_EXT_Emoji/storage/images/';
+		$id   = MW_EXT_Core::outNormalize( $id );
+		$out  = $path . $id . '.svg';
+
+		return $out;
+	}
 
 	/**
 	 * Register tag function.
@@ -17,8 +33,7 @@ class MW_EXT_Emoji {
 	 *
 	 * @return bool
 	 * @throws \MWException
-	 * -------------------------------------------------------------------------------------------------------------- */
-
+	 */
 	public static function onParserFirstCallInit( Parser $parser ) {
 		$parser->setFunctionHook( 'emoji', [ __CLASS__, 'onRenderTag' ] );
 
@@ -34,12 +49,11 @@ class MW_EXT_Emoji {
 	 *
 	 * @return string
 	 * @throws \ConfigException
-	 * -------------------------------------------------------------------------------------------------------------- */
-
+	 */
 	public static function onRenderTag( Parser $parser, $id = '', $size = '' ) {
 		// Argument: id.
 		$getID = MW_EXT_Core::outClear( $id ?? '' ?: '' );
-		$outID = MW_EXT_Core::getConfig( 'ScriptPath' ) . '/extensions/MW_EXT_Emoji/storage/images/' . MW_EXT_Core::outNormalize( $getID ) . '.svg';
+		$outID = self::getEmoji( $getID );
 
 		// Argument: size.
 		$getSize = MW_EXT_Core::outClear( $size ?? '' ?: '' );
@@ -61,8 +75,7 @@ class MW_EXT_Emoji {
 	 * @param Skin $skin
 	 *
 	 * @return bool
-	 * -------------------------------------------------------------------------------------------------------------- */
-
+	 */
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
 		$out->addModuleStyles( [ 'ext.mw.emoji.styles' ] );
 
