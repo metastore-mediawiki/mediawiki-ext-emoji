@@ -3,7 +3,7 @@
 namespace MediaWiki\Extension\MW_EXT_Emoji;
 
 use OutputPage, Parser, Skin;
-use MediaWiki\Extension\MW_EXT_Core\MW_EXT_Core;
+use MediaWiki\Extension\MW_EXT_Kernel\MW_EXT_Kernel;
 
 /**
  * Class MW_EXT_Emoji
@@ -19,8 +19,8 @@ class MW_EXT_Emoji {
 	 * @throws \ConfigException
 	 */
 	private static function getEmoji( $id ) {
-		$path = MW_EXT_Core::getConfig( 'ScriptPath' ) . '/extensions/MW_EXT_Emoji/storage/images/';
-		$id   = MW_EXT_Core::outNormalize( $id );
+		$path = MW_EXT_Kernel::getConfig( 'ScriptPath' ) . '/extensions/MW_EXT_Emoji/storage/images/';
+		$id   = MW_EXT_Kernel::outNormalize( $id );
 		$out  = $path . $id . '.svg';
 
 		return $out;
@@ -52,11 +52,11 @@ class MW_EXT_Emoji {
 	 */
 	public static function onRenderTag( Parser $parser, $id = '', $size = '' ) {
 		// Argument: id.
-		$getID = MW_EXT_Core::outClear( $id ?? '' ?: '' );
+		$getID = MW_EXT_Kernel::outClear( $id ?? '' ?: '' );
 		$outID = self::getEmoji( $getID );
 
 		// Argument: size.
-		$getSize = MW_EXT_Core::outClear( $size ?? '' ?: '' );
+		$getSize = MW_EXT_Kernel::outClear( $size ?? '' ?: '' );
 		$outSize = empty( $getSize ) ? '' : ' width: ' . $getSize . 'em; height: ' . $getSize . 'em;';
 
 		// Out HTML.
