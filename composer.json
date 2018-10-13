@@ -27,7 +27,8 @@
 	},
 	"require": {
 		"composer/installers": "~1.0",
-		"metastore/mediawiki-ext-kernel": "*"
+		"metastore/mediawiki-ext-kernel": "*",
+		"metastore/lib-emoji": "*"
 	},
 	"autoload": {
 		"classmap": [
