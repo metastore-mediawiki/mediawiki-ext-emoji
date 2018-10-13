@@ -18,7 +18,7 @@ class MW_EXT_Emoji {
 	 * @throws \ConfigException
 	 */
 	private static function getEmoji( $id ) {
-		$path = MW_EXT_Kernel::getConfig( 'ScriptPath' ) . '/extensions/MW_EXT_Emoji/storage/images/';
+		$path = MW_EXT_Kernel::getConfig( 'ScriptPath' ) . '/vendor/metastore/lib-emoji/resources/assets/images/';
 		$id   = MW_EXT_Kernel::outNormalize( $id );
 		$out  = $path . $id . '.svg';
 
